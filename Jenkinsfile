@@ -24,6 +24,10 @@ pipeline {
         }
 
         stage('Test') {
+            agent {
+                any
+                reuseNode true
+            }
             steps {
                 echo "Test stage"
                 sh 'test -f build/index.html'
