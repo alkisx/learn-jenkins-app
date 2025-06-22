@@ -50,7 +50,9 @@ pipeline {
                 echo "Test stage"
                 sh '''
                     npm install serve
-                    node_modules/.bin/serve -s build
+                    node_modules/.bin/serve -s build &
+                    # wait 10 seconds for the server to start:
+                    sleep 10
                     npx playwright test
                 '''
             }
