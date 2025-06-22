@@ -53,7 +53,7 @@ pipeline {
                     node_modules/.bin/serve -s build &
                     # wait 10 seconds for the server to start:
                     sleep 10
-                    npx playwright test --report=html
+                    npx playwright test --reporter=html
                 '''
             }
         }
