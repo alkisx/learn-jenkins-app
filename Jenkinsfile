@@ -162,28 +162,29 @@ pipeline {
             
         }
 
-        stage('Deploy prod') {
-            agent {
-                docker {
-                    image 'node:22-alpine3.21'
-                    reuseNode true
-                }
-            }
+        // stage('Deploy prod') {
+        //     agent {
+        //         docker {
+        //             image 'node:22-alpine3.21'
+        //             reuseNode true
+        //         }
+        //     }
             
-            steps {
-                sh '''
-                   npm install netlify-cli
-                   node_modules/.bin/netlify --version
-                   echo "Deploying to production. Project ID: $NETLIFY_SITE_ID" 
-                   node_modules/.bin/netlify status
-                   node_modules/.bin/netlify deploy --dir=build --prod --no-build
-                '''
-            }
+        //     steps {
+        //         sh '''
+        //            npm install netlify-cli
+        //            node_modules/.bin/netlify --version
+        //            echo "Deploying to production. Project ID: $NETLIFY_SITE_ID" 
+        //            node_modules/.bin/netlify status
+        //            node_modules/.bin/netlify deploy --dir=build --prod --no-build
+        //         '''
+        //     }
             
-        }
+        // }
 
-        stage('Prod E2E') {
+        stage('Deply Prod') {
             agent {
+                # this image already includes NodeJS:
                 docker {
                     image 'mcr.microsoft.com/playwright:v1.53.0-noble'
                     reuseNode true
@@ -197,6 +198,13 @@ pipeline {
             steps {
                 echo "Test stage"
                 sh '''
+                    node --version
+                    npm install netlify-cli
+                    node_modules/.bin/netlify --version
+                    echo "Deploying to production. Project ID: $NETLIFY_SITE_ID" 
+                    node_modules/.bin/netlify status
+                    node_modules/.bin/netlify deploy --dir=build --prod --no-build
+                    # Adding some sleep time to ensure the deployment is complete
                     npx playwright test --reporter=html
                 '''
             }
