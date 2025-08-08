@@ -184,7 +184,7 @@ pipeline {
 
         stage('Deply Prod') {
             agent {
-                # this image already includes NodeJS:
+                // this image already includes NodeJS:
                 docker {
                     image 'mcr.microsoft.com/playwright:v1.53.0-noble'
                     reuseNode true
