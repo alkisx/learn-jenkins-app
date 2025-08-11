@@ -1,5 +1,7 @@
+# this image is based on ubuntu 22.04, and includes NodeJS, npm, and Playwright
 FROM mcr.microsoft.com/playwright:v1.53.0-noble
 
-RUN npm install -g netlify-cli node-jq
+RUN npm install -g netlify-cli serve
 
-RUN npm install -g serve
+RUN apt update
+RUN apt install -y jq
