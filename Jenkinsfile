@@ -9,11 +9,11 @@ pipeline {
 
     stages {
 
-        stage('Docker') {
-            steps {
-                sh 'docker build -t my-playwright .'
-            }
-        }
+        // stage('Docker') {
+        //     steps {
+        //         sh 'docker build -t my-playwright .'
+        //     }
+        // }
 
         stage('Build') {
             agent {
@@ -72,8 +72,6 @@ pipeline {
                     steps {
                         echo "Test stage"
                         sh '''
-                            #npm install serve
-                            #node_modules/.bin/serve -s build &
                             serve -s build &
                             # wait 10 seconds for the server to start:
                             sleep 10
