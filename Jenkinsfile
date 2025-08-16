@@ -9,11 +9,11 @@ pipeline {
 
     stages {       
         // required for first time build
-        stage('Docker') {
-            steps {
-                sh 'docker build -t my-playwright .'
-            }
-        }
+        // stage('Docker') {
+        //     steps {
+        //         sh 'docker build -t my-playwright .'
+        //     }
+        // }
 
         stage('Build') {
             agent {
