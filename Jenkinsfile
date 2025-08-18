@@ -55,7 +55,7 @@ pipeline {
                     uname -a
                     #amazon-linux-extras install docker
                     #apt-get install docker -y
-                    yum install docker -y
+                    #yum install docker -y
                     docker build -t my-jenkindapp .
                 '''
                 sh ''
@@ -67,7 +67,7 @@ pipeline {
                 docker {
                     image 'my-aws-cli'
                     reuseNode true
-                    args  "-u root --entrypoint=''" // --entrypoint=''
+                    args  "--entrypoint=''" // --entrypoint=''
                 }
             }
 
@@ -79,7 +79,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'my-jenkins-aws', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
                     sh '''
                     aws --version
-                    yum install jq -y
+                    #yum install jq -y
                     #aws s3 sync build s3://$AWS_S3_BUCKET
                     LATEST_TD_REVISION=$(aws ecs register-task-definition --cli-input-json file://aws/task-definition-prod.json | jq '.taskDefinition.revision')
                     #echo $LATEST_TD_REVISION
