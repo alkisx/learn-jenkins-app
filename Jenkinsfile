@@ -84,6 +84,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'my-jenkins-aws', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
                     sh '''
                     aws --version
+                    sed -i "s/#APP_VERSION#/$REACT_APP_VERSION/g" aws/task-definition-prod.json
                     #yum install jq -y
                     #aws s3 sync build s3://$AWS_S3_BUCKET
                     LATEST_TD_REVISION=$(aws ecs register-task-definition --cli-input-json file://aws/task-definition-prod.json | jq '.taskDefinition.revision')
