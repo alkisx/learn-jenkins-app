@@ -39,6 +39,8 @@ pipeline {
                     echo $LATEST_TD_REVISION
                     aws ecs update-service --cluster LearnJenkinsApp-Cluster-Pro \\
                         --service LearnJenkinsApp-Servuce-Prod --task-definition LearnJenkinsApp-TaskDefinition-Prod:$LATEST_TD_REVISION
+                    aws ecs wait services-stable --cluster earnJenkinsApp-Cluster-Pro \\
+                        --services LearnJenkinsApp-Servuce-Prod
                     '''
                 }
                 
