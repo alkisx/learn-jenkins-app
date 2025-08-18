@@ -54,7 +54,8 @@ pipeline {
                 sh '''
                     uname -a
                     #amazon-linux-extras install docker
-                    apt-get install docker -y
+                    #apt-get install docker -y
+                    yum install docker
                     docker build -t my-jenkindapp .
                 '''
                 sh ''
