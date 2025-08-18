@@ -52,7 +52,8 @@ pipeline {
 
             steps {
                 sh '''
-                    #amazon-linux-extras install docker
+                    uname -a
+                    amazon-linux-extras install docker
                     docker build -t my-jenkindapp .
                 '''
                 sh ''
